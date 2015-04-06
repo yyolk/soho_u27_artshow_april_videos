@@ -144,8 +144,8 @@ $(function() {
   function onFinish(id) {
       status.text('finished');
       setTimeout(function(){
-        vID = 28274354;
-        nSRC = "https://player.vimeo.com/video/"+ vID +"?api=1&player_id=player1&autoplay=true";
+        var vID = 28274354;
+        var nSRC = "https://player.vimeo.com/video/"+ vID +"?api=1&player_id=player1&autoplay=true";
         $("#player1").attr('src', nSRC);
         player = $f(iframe);
         player.api('play');
