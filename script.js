@@ -198,8 +198,7 @@ $(function() {
   }
   var nextVideo = function(){
     setTimeout(function(){
-      // if (idx > playlist.length - 1){
-      if (idx > 1){
+      if (idx > playlist.length - 1){
         idx = 0;
         updatePlaylist();
         // Shuffle(playlist);        
