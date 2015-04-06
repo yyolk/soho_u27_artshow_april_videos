@@ -103,7 +103,7 @@ $(function() {
     var createYPlayer = function(item) {
       console.log('creating YT player with item:', item)
       // loadYTAPI();
-      clearVP();
+      // clearVP();
       // clearYTP();
       if (item.t == 'y') {
         if(!yPlayer){
@@ -186,7 +186,9 @@ $(function() {
     // clear vimeo player
     // delete(vPlayer);
     // vPlayer.unload();
-    vPlayer.pause();
+    if (vPlayer)
+      vPlayer.pause();
+      vPlayer = undefined;
     $(iframe).hide();
     // if (vPlayer)
     //   vPlayer.element.remove();
@@ -232,8 +234,8 @@ $(function() {
   }
 
   var handleYoutube = function(item) {
-    clearVP();
     clearYTP();
+    // clearVP();
     createYPlayer(item);
   }
 
