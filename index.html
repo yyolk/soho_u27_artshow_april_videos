@@ -106,56 +106,10 @@ iframe {
 <body>
 <script src="//f.vimeocdn.com/js/froogaloop2.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<iframe id="player1" src="https://player.vimeo.com/video/73430271?api=1&player_id=player1&autoplay=true" ></iframe>
-
-<div id="wrapper">
-  
-  <div>
-    <button>Play</button>
-    <button>Pause</button>
-    <p>Status: <span class="status">&hellip;</span></p>
-  </div>
-</div>
+<script type="text/javascript" src="js-yaml.min.js"></script>
+<!-- <iframe id="player1" src=""></iframe> -->
+<div id="yPlayer"></div>
 </body>
-<script type="text/javascript">
-$(function() {
-  var iframe = $('#player1')[0];
-  var player = $f(iframe);
-  var status = $('.status');
+<script type="text/javascript" defer src="script.js"></script>
 
-  // When the player is ready, add listeners for pause, finish, and playProgress
-  player.addEvent('ready', function() {
-      status.text('ready');
-      
-      player.addEvent('pause', onPause);
-      player.addEvent('finish', onFinish);
-      player.addEvent('playProgress', onPlayProgress);
-  });
-
-  // Call the API when a button is pressed
-  $('button').bind('click', function() {
-      player.api($(this).text().toLowerCase());
-  });
-
-  function onPause(id) {
-      status.text('paused');
-  }
-
-  function onFinish(id) {
-      status.text('finished');
-      setTimeout(function(){
-        var vID = 28274354;
-        var nSRC = "https://player.vimeo.com/video/"+ vID +"?api=1&player_id=player1&autoplay=true";
-        $("#player1").attr('src', nSRC);
-        player = $f(iframe);
-        player.api('play');
-      }, 400);
-  }
-
-  function onPlayProgress(data, id) {
-      status.text(data.seconds + 's played');
-  }
-});
-
-</script>
 </html>
