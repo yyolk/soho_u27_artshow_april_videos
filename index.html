@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <style type="text/css">
+div {
+  margin-top: 3px;
+  background-color: rgba(255,255,255,0.5);
+  padding: 0 10px;
+}
+
+button {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 13px;
+  padding: 8px 18px 10px;
+  line-height: 1;
+  color: #fff;
+  background: #345;
+  border: 0;
+  border-radius: 4px;
+  margin-left: 0.75em;
+}
+
+p {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+html {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+q, blockquote {
+  quotes: none;
+}
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+a img {
+  border: none;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+  display: block;
+}
+
+iframe {
+  min-width: 100%;
+  min-height: 100%;
+}
+
+body {
+  width: 100%;
+  overflow: visibile;
+  background-size: cover;
+}
+iframe {
+  position: fixed; top: 0; left: 0; z-index: -10; width: 100%; height: 100%;
+  width:100%; height:100%;
+}
+  </style>
+  <meta charset="UTF-8">
+  <title>u27</title>
+
+</head>
+<body>
+<script src="//f.vimeocdn.com/js/froogaloop2.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<iframe id="player1" src="https://player.vimeo.com/video/73430271?api=1&player_id=player1&autoplay=true" ></iframe>
+
+<div id="wrapper">
+  
+  <div>
+    <button>Play</button>
+    <button>Pause</button>
+    <p>Status: <span class="status">&hellip;</span></p>
+  </div>
+</div>
+</body>
+<script type="text/javascript">
+$(function() {
+  var iframe = $('#player1')[0];
+  var player = $f(iframe);
+  var status = $('.status');
+
+  // When the player is ready, add listeners for pause, finish, and playProgress
+  player.addEvent('ready', function() {
+      status.text('ready');
+      
+      player.addEvent('pause', onPause);
+      player.addEvent('finish', onFinish);
+      player.addEvent('playProgress', onPlayProgress);
+  });
+
+  // Call the API when a button is pressed
+  $('button').bind('click', function() {
+      player.api($(this).text().toLowerCase());
+  });
+
+  function onPause(id) {
+      status.text('paused');
+  }
+
+  function onFinish(id) {
+      status.text('finished');
+      setTimeout(function(){
+        player.api('play');
+      }, 400);
+  }
+
+  function onPlayProgress(data, id) {
+      status.text(data.seconds + 's played');
+  }
+});
+
+</script>
+</html>
