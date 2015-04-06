@@ -186,7 +186,7 @@ $(function() {
     // clear vimeo player
     // delete(vPlayer);
     // vPlayer.unload();
-    // vPlayer.stop();
+    vPlayer.pause();
     $(iframe).hide();
     // if (vPlayer)
     //   vPlayer.element.remove();
